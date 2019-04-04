@@ -11,6 +11,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -26,7 +28,7 @@ public class TextIo
 	
 	public static void main(String[] args) throws IOException
 	{
-		//reader();
+		fileOutput_Files();
 	}
 	
 	public static void base()
@@ -63,6 +65,25 @@ public class TextIo
 						new FileOutputStream(path + "output_test2.txt"),"UTF-8"),true/*自动冲刷*/);
 		out2.println("123456");
 		out2.close();
+	}
+	
+	/**
+	 * 处理中小长度文件
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static void fileOutput_Files() throws UnsupportedEncodingException, IOException
+	{
+		String content = "abcdefg\n1234567";
+				
+		Files.write(Paths.get(path+"output_tes3.txt"), content.getBytes("UTF-8"),StandardOpenOption.CREATE);
+		
+		Files.write(Paths.get(path+"output_tes3.txt"), "\noh hhh".getBytes("UTF-8"),StandardOpenOption.APPEND);
+		
+		@SuppressWarnings("serial")
+		List<String> lines = new ArrayList<>(2) {{add("123");add("456");}};
+		
+		Files.write(Paths.get(path+"output_tes4.txt"),lines);
 	}
 	
 	public static void fileInput_Files() throws IOException
