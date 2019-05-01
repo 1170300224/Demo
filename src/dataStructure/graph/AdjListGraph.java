@@ -17,7 +17,6 @@ public class AdjListGraph<T> implements Graph<T>
 {
 	Map<T,Set<Node<T>>> list = new HashMap<>();
 	
-	
 	@Override
 	public boolean add(T vertex) {
 		return list.putIfAbsent(vertex, new HashSet<>()) == null;
@@ -58,7 +57,7 @@ public class AdjListGraph<T> implements Graph<T>
 	@Override
 	public boolean setEdge(T from, T to, int weight) {
 		if(weight <= 0 || from == null || to == null)
-			throw new RuntimeException("参数非法");
+			throw new IllegalArgumentException("参数非法:"+"from="+from+",to="+to+",weight="+weight);
 		if(!list.containsKey(from) || !list.containsKey(to))
 			throw new RuntimeException("试图在不存在的两点间设置边");
 		
